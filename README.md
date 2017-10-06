@@ -1,7 +1,7 @@
 # [PixelShare](https://github.com/PixelShareInc/pixelshare "PixelShare")
 
 [![Build Status](https://travis-ci.org/PixelShareInc/pixelshare.svg?branch=master)](https://travis-ci.org/PixelShareInc/pixelshare)
-<!-- [![GitHub release](https://img.shields.io/github/release/derekkramer/portfolio-react.svg)]() -->
+[![GitHub release](https://img.shields.io/github/release/PixelShareInc/pixelshare.svg)]()
 [![Code Climate](https://codeclimate.com/github/PixelShareInc/pixelshare/badges/gpa.svg)](https://codeclimate.com/github/PPixelShareInc/pixelshare)
 [![Issue Count](https://codeclimate.com/github/PixelShareInc/pixelshare/badges/issue_count.svg)](https://codeclimate.com/github/PixelShareInc/pixelshare)
 [![Dependencies Status](https://david-dm.org/PixelShareInc/pixelshare.svg)](https://david-dm.org/PixelShareInc/pixelshare)
