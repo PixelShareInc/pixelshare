@@ -1,0 +1,9 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  margin: 0 5vw; }
+
+.quilt {
+  width: 90vw;
+  height: 80vh;
+  border: 2px solid grey; }
