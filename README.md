@@ -1,11 +1,11 @@
 # [PixelShare](https://github.com/PixelShareInc/pixelshare "PixelShare")
 
-<!-- [![Build Status](https://travis-ci.org/derekkramer/portfolio-react.svg?branch=master)](https://travis-ci.org/derekkramer/portfolio-react)
-[![GitHub release](https://img.shields.io/github/release/derekkramer/portfolio-react.svg)]()
-[![Code Climate](https://codeclimate.com/github/derekkramer/portfolio-react/badges/gpa.svg)](https://codeclimate.com/github/derekkramer/portfolio-react)
-[![Issue Count](https://codeclimate.com/github/derekkramer/portfolio-react/badges/issue_count.svg)](https://codeclimate.com/github/derekkramer/portfolio-react)
-[![Dependencies Status](https://david-dm.org/derekkramer/portfolio-react.svg)](https://david-dm.org/derekkramer/portfolio-react)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fderekkramer%2Fportfolio-react.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fderekkramer%2Fportfolio-react?ref=badge_shield) -->
+[![Build Status](https://travis-ci.org/PixelShareInc/pixelshare.svg?branch=master)](https://travis-ci.org/PixelShareInc/pixelshare)
+<!-- [![GitHub release](https://img.shields.io/github/release/derekkramer/portfolio-react.svg)]() -->
+[![Code Climate](https://codeclimate.com/github/PixelShareInc/pixelshare/badges/gpa.svg)](https://codeclimate.com/github/PPixelShareInc/pixelshare)
+[![Issue Count](https://codeclimate.com/github/PixelShareInc/pixelshare/badges/issue_count.svg)](https://codeclimate.com/github/PixelShareInc/pixelshare)
+[![Dependencies Status](https://david-dm.org/PixelShareInc/pixelshare.svg)](https://david-dm.org/PixelShareInc/pixelshare)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FPixelShareInc%2Fpixelshare.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FPixelShareInc%2Fpixelshare?ref=badge_shield)
 
 ---
 
