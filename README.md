@@ -2,14 +2,14 @@
 
 [![Build Status](https://travis-ci.org/PixelShareInc/pixelshare.svg?branch=master)](https://travis-ci.org/PixelShareInc/pixelshare)
 [![GitHub release](https://img.shields.io/github/release/PixelShareInc/pixelshare.svg)]()
-[![Code Climate](https://codeclimate.com/github/PixelShareInc/pixelshare/badges/gpa.svg)](https://codeclimate.com/github/PPixelShareInc/pixelshare)
+[![Code Climate](https://codeclimate.com/github/PixelShareInc/pixelshare/badges/gpa.svg)](https://codeclimate.com/github/PixelShareInc/pixelshare)
 [![Issue Count](https://codeclimate.com/github/PixelShareInc/pixelshare/badges/issue_count.svg)](https://codeclimate.com/github/PixelShareInc/pixelshare)
 [![Dependencies Status](https://david-dm.org/PixelShareInc/pixelshare.svg)](https://david-dm.org/PixelShareInc/pixelshare)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FPixelShareInc%2Fpixelshare.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FPixelShareInc%2Fpixelshare?ref=badge_shield)
 
 ---
 
-**PixelShare** is a simple and easy-to-use amalgamated art project. Users can access the quilt without login and can add their own pixel art to it. The application is built on the [React](https://reactjs.org/) framework, styled with [Sass](https://sass-lang.com). The API uses a [NodeJS](https://nodejs.org) back end with [Express](https://expressjs.com) and [PostgreSQL](https://postgresql.org).  
+**PixelShare** is a simple and easy-to-use amalgamated art project. Users can access the quilt without login and can add their own pixel art to it. The application is built on the [React](https://reactjs.org/) framework, styled with [Sass](https://sass-lang.com). The API uses a [NodeJS](https://nodejs.org) back end with [Express](https://expressjs.com) and [MongoDB](https://mongodb.com).  
 
 <!-- *Portfolio hosted at <http://derekkramer.co>*
 
@@ -60,7 +60,7 @@ $ gulp
 ##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://jwt.io/assets/logo.svg" height="50" align="top">](https://www.jwt.io)
 ##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Node.js_logo_2015.svg/591px-Node.js_logo_2015.svg.png" height="50" align="top">](https://nodejs.org)
 ##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="http://www.amt.in/img/services/express.png" height="50" align="top">](https://expressjs.com)
-##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://www.virtual-dba.com/media/postgresql-database-services-remote-dba.png" height="50" align="top">](https://postgresql.org)
+##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://webassets.mongodb.com/_com_assets/cms/MongoDB-Logo-5c3a7405a85675366beb3a5ec4c032348c390b3f142f5e6dddf1d78e2df5cb5c.png" height="50" align="top">](https://mongodb.com)
 
 ## <a name="License"><a>License
 
