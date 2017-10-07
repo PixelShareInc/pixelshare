@@ -1,9 +1,24 @@
 .App {
   display: flex;
   flex-direction: column;
-  margin: 0 5vw; }
+  margin: 0; }
 
-.quilt {
-  width: 90vw;
-  height: 80vh;
-  border: 2px solid grey; }
+#quilt {
+  width: 100vw;
+  height: 100vw;
+  border: 2px solid grey;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box; }
+  #quilt div {
+    display: flex;
+    flex-wrap: wrap; }
+  #quilt .region {
+    width: 50%;
+    height: 50%; }
+  #quilt .block {
+    width: 10%;
+    height: 10%; }
+  #quilt .pixel {
+    width: 2%;
+    height: 2%; }

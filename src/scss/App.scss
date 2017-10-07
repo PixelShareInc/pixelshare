@@ -1,10 +1,30 @@
 .App {
     display: flex;
     flex-direction: column;
-    margin: 0 5vw;
+    margin: 0;
 }
 
-.quilt {
-    width: 90vw; height: 80vh;
+#quilt {
+    width: 100vw; height: 100vw;
     border: 2px solid grey;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+
+    div {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .region {
+        width: 50%; height: 50%;
+    }
+
+    .block {
+        width: 10%; height: 10%;
+    }
+
+    .pixel {
+        width: 2%; height: 2%;
+    }
 }
