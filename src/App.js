@@ -33,6 +33,8 @@ class App extends Component {
 
                 ctx.scale(scale, scale);
 
+                ctx.clearRect(0, 0, 2000, 2000);
+
                 drawCanvas(res, ctx);
 
                 event.preventDefault();
