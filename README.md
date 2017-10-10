@@ -1,3 +1,5 @@
+![PixelShare](readme-src/banner.png)
+
 # [PixelShare](https://github.com/PixelShareInc/pixelshare "PixelShare")
 
 [![Build Status](https://travis-ci.org/PixelShareInc/pixelshare.svg?branch=master)](https://travis-ci.org/PixelShareInc/pixelshare)
