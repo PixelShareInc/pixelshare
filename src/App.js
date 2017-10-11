@@ -17,9 +17,9 @@ class App extends Component {
         let visibleHeight = height;
         let zoomIntensity = 0.2;
 
-        ctx.scale(2, 2);
+        ctx.scale(4, 4);
 
-        originalScale = scale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.001;
+        originalScale = scale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.002;
 
         axios.get('http://localhost:3001/')
         .then(result => setInterval(() => drawCanvas(result, ctx), 10))
@@ -57,7 +57,7 @@ class App extends Component {
 
             window.onresize = () => {
                 scale /= originalScale;
-                originalScale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.001;
+                originalScale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.002;
                 scale *= originalScale;
             };
         })
@@ -89,7 +89,7 @@ function drawCanvas(result, ctx) {
                 let loc = getLocation(b, row, col);
 
                 ctx.fillStyle = `#${rowColors[col]}`;
-                ctx.fillRect(loc.x, loc.y, 2.3, 2.3);
+                ctx.fillRect(loc.x, loc.y, 1.3, 1.3);
             }
 
             iterator++;
@@ -98,8 +98,8 @@ function drawCanvas(result, ctx) {
 }
 
 function getLocation(b, row, col) {
-    let x = ((b % 10) * 100) + col * 2;
-    let y = (Math.floor(b / 10) * 100) + row * 2;
+    let x = ((b % 10) * 50) + col;
+    let y = (Math.floor(b / 10) * 50) + row;
 
     return {x, y};
 }
