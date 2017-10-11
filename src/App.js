@@ -51,8 +51,6 @@ class App extends Component {
                     visibleWidth = width / scale;
                     visibleHeight = height / scale;
                 }
-
-                console.log(originX, originY);
             }
 
             window.onresize = () => {
