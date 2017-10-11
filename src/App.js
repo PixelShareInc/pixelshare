@@ -13,14 +13,13 @@ class App extends Component {
         const ctx = canvas.getContext('2d');
         let width = canvas.width = 2000;
         let height = canvas.height = 2000;
+        let visibleWidth = width;
+        let visibleHeight = height;
         let zoomIntensity = 0.2;
 
         ctx.scale(2, 2);
 
         originalScale = scale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.001;
-
-        let visibleWidth = width;
-        let visibleHeight = height;
 
         axios.get('http://localhost:3001/')
         .then(result => setInterval(() => drawCanvas(result, ctx), 10))
