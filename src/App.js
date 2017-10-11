@@ -89,7 +89,7 @@ function drawCanvas(result, ctx) {
                 let loc = getLocation(b, row, col);
 
                 ctx.fillStyle = `#${rowColors[col]}`;
-                ctx.fillRect(loc.x, loc.y, 1.3, 1.3);
+                ctx.fillRect(loc.x, loc.y, 1.15, 1.15);
             }
 
             iterator++;
