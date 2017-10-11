@@ -37,48 +37,21 @@ Then, navigate into the directory where you want to clone the repository and ent
 $ git clone https://www.github.com/PixelShareInc/pixelshare.git
 ```
 
-#### API
+### API
 
-Proper development operation requires the PixelShare API and MongoDB. First ensure that you have MongoDB installed:
-
-```
-$ mongod --version
-```
-
-If you don't have MongoDB installed, either follow the [instructions](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/) on their website, or install using brew with [Treehouse](https://treehouse.github.io/installation-guides/mac/mongo-mac.html).
-
-Once you've installed MongoDB, in a separate terminal window, start the service:
+Proper development operation requires the PixelShare API and MongoDB. Follow the installation [instructions](https://github.com/PixelShareInc/API) for the PixelShare API, then ensure you have MongoDB running in another terminal window:
 
 ```
 $ mongod
 ```
 
-Then, navigate into the directory where you want to clone the PixelShare API repository and enter:
-
-```
-$ git clone https://www.github.com/PixelShareInc/API.git
-```
-
-Navigate into the API directory and install dependencies:
-
-```
-$ npm install
-```
-
-Then create the `pixelshare` database, collections, and documents:
-
-```
-$ node db/migrate.js
-$ node db/seed.js
-```
-
-Finally start the API server by running:
+...and the API server running by navigating into the API repository and running:
 
 ```
 $ npm start
 ```
 
-#### Back to the client
+### Back to the client
 
 Navigate back into the front end repository directory you cloned earlier and install dependencies:
 
