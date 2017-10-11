@@ -8,6 +8,14 @@ let originX = 0;
 let originY = 0;
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            down: false
+        };
+    }
+
     componentDidMount() {
         const canvas = document.getElementById('quilt');
         const ctx = canvas.getContext('2d');
@@ -24,10 +32,22 @@ class App extends Component {
         axios.get('http://localhost:3001/')
         .then(result => setInterval(() => drawCanvas(result, ctx), 10))
         .then(() => {
-            canvas.onclick = event => {
-                ctx.fillStyle = '#ff0000';
-                ctx.fillRect(500, 500, 20, 20);
-            };
+            // canvas.onclick = event => {
+            //     ctx.fillStyle = '#ff0000';
+            //     ctx.fillRect(500, 500, 20, 20);
+            // };
+
+            canvas.onmousedown = () => this.setState({ down: true });
+
+            canvas.onmouseup = () => this.setState({ down: false });
+
+            canvas.onmousemove = event => {
+                if(this.state.down) {
+                    originX -= event.movementX / scale;
+                    originY -= event.movementY / scale;
+                    ctx.translate(event.movementX / scale, event.movementY / scale);
+                }
+            }
 
             canvas.onmousewheel = event => {
                 event.preventDefault();
