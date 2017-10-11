@@ -1,5 +1,6 @@
 .App {
     margin: 0;
+    padding: 0;
 }
 
 .container {
@@ -7,10 +8,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 #quilt {
-    // width: 1000px; height: 1000px;
-    width: 95vh; height: 95vh;
+    width: 100vh; height: 100vh;
     border: 1px solid black;
+    margin: 0;
+    padding: 0;
 }
