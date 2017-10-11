@@ -4,41 +4,60 @@ import './css/App.css';
 const axios = require('axios');
 const $ = require('jquery');
 
+let scale, originalScale;
+let originX = 0;
+let originY = 0;
+
 class App extends Component {
     componentDidMount() {
         const canvas = document.getElementById('quilt');
-        canvas.width = 2000;
-        canvas.height = 2000;
         const ctx = canvas.getContext('2d');
-        let res;
+        let width = canvas.width = 2000;
+        let height = canvas.height = 2000;
+        let zoomIntensity = 0.2;
 
-        let scale = 2
+        ctx.scale(2, 2);
 
-        ctx.scale(scale, scale);
+        originalScale = scale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.001;
+
+        let visibleWidth = width;
+        let visibleHeight = height;
 
         axios.get('http://localhost:3001/')
-        .then(result => {
-            res = result;
-            drawCanvas(result, ctx);
-        })
+        .then(result => setInterval(() => drawCanvas(result, ctx), 10))
         .then(() => {
-            $('#quilt').click((event) => {
+            $('#quilt').click(event => {
                 ctx.fillStyle = '#ff0000';
                 ctx.fillRect(500, 500, 2, 2);
             });
 
-            canvas.addEventListener('mousewheel', (event) => {
-                scale = event.deltaY > 0 ? 0.7 : 1.3;
-                console.log(scale);
-
-                ctx.scale(scale, scale);
-
-                ctx.clearRect(0, 0, 2000, 2000);
-
-                drawCanvas(res, ctx);
-
+            canvas.onmousewheel = event => {
                 event.preventDefault();
-            }, false);
+
+                let mouseX = event.clientX - canvas.offsetLeft;
+                let mouseY = event.clientY - canvas.offsetTop;
+                let wheel = event.wheelDelta / 120;
+                let zoom = Math.exp(wheel * zoomIntensity);
+
+                ctx.translate(originX, originY);
+
+                originX -= mouseX / (scale * zoom) - mouseX / scale;
+                originY -= mouseY / (scale * zoom) - mouseY / scale;
+
+                ctx.scale(zoom, zoom);
+
+                ctx.translate(-originX, -originY);
+
+                scale *= zoom;
+                visibleWidth = width / scale;
+                visibleHeight = height / scale;
+            }
+
+            $(window).resize(() => {
+                scale /= originalScale;
+                originalScale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.001;
+                scale *= originalScale;
+            });
         })
         .catch(err => console.error(err));
     }
@@ -55,6 +74,9 @@ class App extends Component {
 }
 
 function drawCanvas(result, ctx) {
+    ctx.fillStyle = 'white';
+    ctx.fillRect(originX, originY, 2000 / scale, 2000 / scale);
+
     let iterator = 0;
 
     for(let b = 0; b < 100; b++){
@@ -71,6 +93,8 @@ function drawCanvas(result, ctx) {
             iterator++;
         }
     }
+
+    console.log('frame');
 }
 
 function getLocation(b, row, col) {
