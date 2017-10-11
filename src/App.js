@@ -11,6 +11,7 @@ class App extends Component {
     componentDidMount() {
         const canvas = document.getElementById('quilt');
         const ctx = canvas.getContext('2d');
+        const originalMatrix = { a: 2, b: 0, c: 0, d: 2, e: 0, f: 0 };
         let width = canvas.width = 2000;
         let height = canvas.height = 2000;
         let visibleWidth = width;
@@ -37,18 +38,22 @@ class App extends Component {
                 let wheel = event.wheelDelta / 120;
                 let zoom = Math.exp(wheel * zoomIntensity);
 
-                ctx.translate(originX, originY);
+                if(scale * zoom >= originalScale) {
+                    ctx.translate(originX, originY);
 
-                originX -= mouseX / (scale * zoom) - mouseX / scale;
-                originY -= mouseY / (scale * zoom) - mouseY / scale;
+                    originX -= mouseX / (scale * zoom) - mouseX / scale;
+                    originY -= mouseY / (scale * zoom) - mouseY / scale;
 
-                ctx.scale(zoom, zoom);
+                    ctx.scale(zoom, zoom);
 
-                ctx.translate(-originX, -originY);
+                    ctx.translate(-originX, -originY);
 
-                scale *= zoom;
-                visibleWidth = width / scale;
-                visibleHeight = height / scale;
+                    scale *= zoom;
+                    visibleWidth = width / scale;
+                    visibleHeight = height / scale;
+                }
+
+                console.log(originX, originY);
             }
 
             window.onresize = () => {
