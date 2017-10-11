@@ -81,8 +81,8 @@ function drawCanvas(result, ctx) {
 
     let iterator = 0;
 
-    for(let b = 0; b < 100; b++){
-        for(let row = 0; row < 50; row++){
+    for(let b = 0; b < 100; b++) {
+        for(let row = 0; row < 50; row++) {
             let rowColors = result.data[iterator].color.split(',');
 
             for(let col = 0; col < 50; col++){
@@ -98,8 +98,8 @@ function drawCanvas(result, ctx) {
 }
 
 function getLocation(b, row, col) {
-    let x = ((b % 10) * 50) + col;
-    let y = (Math.floor(b / 10) * 50) + row;
+    let x = (b % 10) * 50 + col;
+    let y = Math.floor(b / 10) * 50 + row;
 
     return {x, y};
 }
