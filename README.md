@@ -39,13 +39,13 @@ $ git clone https://www.github.com/PixelShareInc/pixelshare.git
 
 #### API
 
-Proper development operation requires the PixelShare API and MongoDB. First ensure that you have MongoDB installed.
+Proper development operation requires the PixelShare API and MongoDB. First ensure that you have MongoDB installed:
 
 ```
 $ mongod --version
 ```
 
-If you don't have MongoDB installed, either follow the instructions on their [website](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/), or following method using brew from [Treehouse](https://treehouse.github.io/installation-guides/mac/mongo-mac.html).
+If you don't have MongoDB installed, either follow the [instructions](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/) on their website, or install using brew with [Treehouse](https://treehouse.github.io/installation-guides/mac/mongo-mac.html).
 
 Once you've installed MongoDB, in a separate terminal window, start the service:
 
@@ -106,7 +106,7 @@ $ gulp
 ## <a name="Resources"><a>Community Resources
 
 
-##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://realpython.com/images/react.png" height="50" align="top">](https://reactjs.org)
+##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://cosmicjs.com/uploads/9c2d95d0-27b0-11e7-b6ae-8108cf4caa96-react.svg" height="50" align="top">](https://reactjs.org)
 ##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="http://sass-lang.com/assets/img/styleguide/color-1c4aab2b.png" height="50" align="top">](http://sass-lang.com)
 ##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://jwt.io/assets/logo.svg" height="50" align="top">](http://www.jwt.io)
 ##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Node.js_logo_2015.svg/591px-Node.js_logo_2015.svg.png" height="50" align="top">](https://nodejs.org)
