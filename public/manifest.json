@@ -3,8 +3,8 @@
     "name": "PixelShare",
     "icons": [
         {
-            "src": "favicon.ico",
-            "sizes": "192x192",
+            "src": "favicon.png",
+            "sizes": "400x400",
             "type": "image/png"
         }
     ],
