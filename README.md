@@ -13,9 +13,7 @@
 
 **PixelShare** is a simple and easy-to-use amalgamated art project. Users can access the quilt without login and can add their own pixel art to it. The application is built on the [React](https://reactjs.org/) framework, styled with [Sass](https://sass-lang.com). The API uses a [NodeJS](https://nodejs.org) back end with [Express](https://expressjs.com) and [MongoDB](https://mongodb.com).  
 
-<!-- *Portfolio hosted at <http://derekkramer.co>*
-
-![Screenshot](readme-src/portfolio-screenshot.png) -->
+<!-- ![Screenshot](readme-src/screenshot.png) -->
 
 ## Table of contents
 
@@ -36,23 +34,74 @@ $ brew install git
 Then, navigate into the directory where you want to clone the repository and enter:
 
 ```
-$ git clone https://www.github.com/PixelShareInc/pixelshare
+$ git clone https://www.github.com/PixelShareInc/pixelshare.git
 ```
 
-Finally, navigate into the repository directory and install dependencies and run the development server:
+#### API
+
+Proper development operation requires the PixelShare API and MongoDB. First ensure that you have MongoDB installed.
+
+```
+$ mongod --version
+```
+
+If you don't have MongoDB installed, either follow the instructions on their [website](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/), or following method using brew from [Treehouse](https://treehouse.github.io/installation-guides/mac/mongo-mac.html).
+
+Once you've installed MongoDB, in a separate terminal window, start the service:
+
+```
+$ mongod
+```
+
+Then, navigate into the directory where you want to clone the PixelShare API repository and enter:
+
+```
+$ git clone https://www.github.com/PixelShareInc/API.git
+```
+
+Navigate into the API directory and install dependencies:
 
 ```
 $ npm install
+```
+
+Then create the `pixelshare` database, collections, and documents:
+
+```
+$ node db/migrate.js
+$ node db/seed.js
+```
+
+Finally start the API server by running:
+
+```
 $ npm start
 ```
 
-*To edit the styling, enter:*
+#### Back to the client
+
+Navigate back into the front end repository directory you cloned earlier and install dependencies:
+
+```
+$ npm install
+```
+
+Then, with the API server running on `localhost:3001`, start the front end server:
+
+```
+$ npm start
+```
+
+Your PixelShare development front end should be available at `localhost:3000`
+
+
+*To edit the styling, while in the front end directory, enter:*
 
 ```
 $ gulp
 ```
 
-*Then only edit the `.scss` files in the `scss/` directory*
+*Then only edit the `.scss` files in the `src/scss/` directory*
 
 ## <a name="Resources"><a>Community Resources
 
