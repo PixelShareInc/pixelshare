@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './css/App.css';
 
 const axios = require('axios');
-const $ = require('jquery');
 
 let scale, originalScale;
 let originX = 0;
@@ -26,10 +25,10 @@ class App extends Component {
         axios.get('http://localhost:3001/')
         .then(result => setInterval(() => drawCanvas(result, ctx), 10))
         .then(() => {
-            $('#quilt').click(event => {
+            canvas.onclick = event => {
                 ctx.fillStyle = '#ff0000';
-                ctx.fillRect(500, 500, 2, 2);
-            });
+                ctx.fillRect(500, 500, 20, 20);
+            };
 
             canvas.onmousewheel = event => {
                 event.preventDefault();
@@ -53,11 +52,11 @@ class App extends Component {
                 visibleHeight = height / scale;
             }
 
-            $(window).resize(() => {
+            window.onresize = () => {
                 scale /= originalScale;
                 originalScale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.001;
                 scale *= originalScale;
-            });
+            };
         })
         .catch(err => console.error(err));
     }
@@ -93,8 +92,6 @@ function drawCanvas(result, ctx) {
             iterator++;
         }
     }
-
-    console.log('frame');
 }
 
 function getLocation(b, row, col) {
