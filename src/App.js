@@ -11,7 +11,6 @@ class App extends Component {
     componentDidMount() {
         const canvas = document.getElementById('quilt');
         const ctx = canvas.getContext('2d');
-        const originalMatrix = { a: 2, b: 0, c: 0, d: 2, e: 0, f: 0 };
         let width = canvas.width = 2000;
         let height = canvas.height = 2000;
         let visibleWidth = width;
