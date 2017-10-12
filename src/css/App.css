@@ -1,8 +1,4 @@
 .App {
-  margin: 0;
-  padding: 0; }
-
-.container {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -10,10 +6,17 @@
   align-items: center;
   margin: 0;
   padding: 0; }
-
-#quilt {
-  width: 100vh;
-  height: 100vh;
-  border: 1px solid black;
-  margin: 0;
-  padding: 0; }
+  .App div {
+    width: calc(100vw / 2 - 100vh / 2);
+    height: 100vh;
+    padding: 2vh 2vw;
+    box-sizing: border-box; }
+    .App div p {
+      margin: 8vh 0; }
+  .App #quilt {
+    width: 100vh;
+    height: 100vh;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    margin: 0;
+    padding: 0; }
