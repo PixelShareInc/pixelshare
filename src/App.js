@@ -16,6 +16,12 @@ class App extends Component {
             moved: false,
             color: 'ff0000'
         };
+
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(event) {
+        this.setState({ color: event.target.id.slice(5) });
     }
 
     componentDidMount() {
@@ -45,10 +51,8 @@ class App extends Component {
                 if(this.state.moved === false) {
                     let { pixelX, pixelY } = getPixelLocation(event, canvas);
                     let { doc, col } = getDocumentLocation(pixelX, pixelY);
-                    // console.log(doc, quilt[doc], col);
-                    quilt[doc].color = updatePixel(quilt[doc].color, this.state.color, col);
 
-                    document.getElementById('location').innerHTML = 'X: ' + pixelX + ', Y: ' + pixelY;
+                    quilt[doc].color = updatePixel(quilt[doc].color, this.state.color, col);
                 }
 
                 movedX = movedY = 0;
@@ -111,12 +115,34 @@ class App extends Component {
                 </div>
                 <canvas id='quilt'></canvas>
                 <div className='palette'>
-                    <p>Pixel location: <span id='location'></span></p>
+                    <Palette onClick={this.onClick} />
                 </div>
             </div>
         );
     }
 }
+
+const Palette = ({onClick}) =>
+    <div id='palette' onClick={onClick}>
+        <div className='color' id='color247a23'></div>
+        <div className='color' id='color30bf2e'></div>
+        <div className='color' id='color269e8c'></div>
+        <div className='color' id='color205988'></div>
+        <div className='color' id='color37abe4'></div>
+        <div className='color' id='color8300dc'></div>
+        <div className='color' id='colorac0f5f'></div>
+        <div className='color' id='colorf42618'></div>
+        <div className='color' id='colore9671d'></div>
+        <div className='color' id='colorf29221'></div>
+        <div className='color' id='colorff78e9'></div>
+        <div className='color' id='colorffcd94'></div>
+        <div className='color' id='colorf0ee4d'></div>
+        <div className='color' id='color8b4513'></div>
+        <div className='color' id='colorffffff'></div>
+        <div className='color' id='colord4d4d4'></div>
+        <div className='color' id='color868686'></div>
+        <div className='color' id='color000000'></div>
+    </div>
 
 function updatePixel(doc, color, col) {
     col *= 7;

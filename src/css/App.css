@@ -9,10 +9,58 @@
   .App div {
     width: calc(100vw / 2 - 100vh / 2);
     height: 100vh;
-    padding: 2vh 2vw;
+    padding: 3vh 2vw;
     box-sizing: border-box; }
     .App div p {
       margin: 8vh 0; }
+  .App #palette {
+    width: 12vh;
+    height: 54vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: top;
+    padding: 0; }
+    .App #palette .color {
+      width: 6vh;
+      height: 6vh;
+      padding: 0; }
+    .App #palette #color247a23 {
+      background-color: #247a23; }
+    .App #palette #color30bf2e {
+      background-color: #30bf2e; }
+    .App #palette #color269e8c {
+      background-color: #269e8c; }
+    .App #palette #color205988 {
+      background-color: #205988; }
+    .App #palette #color37abe4 {
+      background-color: #37abe4; }
+    .App #palette #color8300dc {
+      background-color: #8300dc; }
+    .App #palette #colorac0f5f {
+      background-color: #ac0f5f; }
+    .App #palette #colorf42618 {
+      background-color: #f42618; }
+    .App #palette #colore9671d {
+      background-color: #e9671d; }
+    .App #palette #colorf29221 {
+      background-color: #f29221; }
+    .App #palette #colorff78e9 {
+      background-color: #ff78e9; }
+    .App #palette #colorffcd94 {
+      background-color: #ffcd94; }
+    .App #palette #colorf0ee4d {
+      background-color: #f0ee4d; }
+    .App #palette #color8b4513 {
+      background-color: #8b4513; }
+    .App #palette #colorffffff {
+      background-color: #ffffff; }
+    .App #palette #colord4d4d4 {
+      background-color: #d4d4d4; }
+    .App #palette #color868686 {
+      background-color: #868686; }
+    .App #palette #color000000 {
+      background-color: #000000; }
   .App #quilt {
     width: 100vh;
     height: 100vh;

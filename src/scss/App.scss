@@ -9,12 +9,101 @@
     div {
         width: calc(100vw / 2 - 100vh / 2);
         height: 100vh;
-        padding: 2vh 2vw;
+        padding: 3vh 2vw;
         box-sizing: border-box;
 
         p {
             margin: 8vh 0;
         }
+    }
+
+    #palette {
+        width: 12vh;
+        height: 54vh;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: top;
+        padding: 0;
+
+        .color {
+            width: 6vh;
+            height: 6vh;
+            padding: 0;
+        }
+
+        #color247a23 {
+            background-color: #247a23;
+        }
+
+        #color30bf2e {
+            background-color: #30bf2e;
+        }
+
+        #color269e8c {
+            background-color: #269e8c;
+        }
+
+        #color205988 {
+            background-color: #205988;
+        }
+
+        #color37abe4 {
+            background-color: #37abe4;
+        }
+
+        #color8300dc {
+            background-color: #8300dc;
+        }
+
+        #colorac0f5f {
+            background-color: #ac0f5f;
+        }
+
+        #colorf42618 {
+            background-color: #f42618;
+        }
+
+        #colore9671d {
+            background-color: #e9671d;
+        }
+
+        #colorf29221 {
+            background-color: #f29221;
+        }
+
+        #colorff78e9 {
+            background-color: #ff78e9;
+        }
+
+        #colorffcd94 {
+            background-color: #ffcd94;
+        }
+
+        #colorf0ee4d {
+            background-color: #f0ee4d;
+        }
+
+        #color8b4513 {
+            background-color: #8b4513;
+        }
+
+        #colorffffff {
+            background-color: #ffffff;
+        }
+
+        #colord4d4d4 {
+            background-color: #d4d4d4;
+        }
+
+        #color868686 {
+            background-color: #868686;
+        }
+
+        #color000000 {
+            background-color: #000000;
+        }
+
     }
 
     #quilt {
