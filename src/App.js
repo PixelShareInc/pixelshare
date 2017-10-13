@@ -194,30 +194,38 @@ function drawCanvas(ctx, offscreenCanvas) {
 
 function drawOffscreenCanvas(result, ctx, b = null, row = null, col = null) {
     if(!b || !row || !col) {
-        let iterator = 0;
-
-        for(let b = 0; b < 100; b++) {
-            for(let row = 0; row < 50; row++) {
-                let rowColors = result[iterator].color.split(',');
-
-                for(let col = 0; col < 50; col++){
-                    let loc = getDrawLocation(b, row, col);
-
-                    ctx.fillStyle = `#${rowColors[col]}`;
-                    ctx.fillRect(loc.x, loc.y, 1.15, 1.15);
-                }
-
-                iterator++;
-            }
-        }
+        initOffscreenCanvas(result, ctx);
     } else {
-        let iterator = b * 50 + row;
-        let rowColors = result[iterator].color.split(',');
-        let loc = getDrawLocation(b, row, col);
-
-        ctx.fillStyle = `#${rowColors[col]}`;
-        ctx.fillRect(loc.x, loc.y, 1, 1);
+        updateOffscreenCanvas(result, ctx, b, row, col);
     }
+}
+
+function initOffscreenCanvas(result, ctx) {
+    let iterator = 0;
+
+    for(let b = 0; b < 100; b++) {
+        for(let row = 0; row < 50; row++) {
+            let rowColors = result[iterator].color.split(',');
+
+            for(let col = 0; col < 50; col++){
+                let loc = getDrawLocation(b, row, col);
+
+                ctx.fillStyle = `#${rowColors[col]}`;
+                ctx.fillRect(loc.x, loc.y, 1.15, 1.15);
+            }
+
+            iterator++;
+        }
+    }
+}
+
+function updateOffscreenCanvas(result, ctx, b, row, col) {
+    let iterator = b * 50 + row;
+    let rowColors = result[iterator].color.split(',');
+    let loc = getDrawLocation(b, row, col);
+
+    ctx.fillStyle = `#${rowColors[col]}`;
+    ctx.fillRect(loc.x, loc.y, 1, 1);
 }
 
 function getDrawLocation(b, row, col) {
