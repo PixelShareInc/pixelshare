@@ -11,8 +11,6 @@
     height: 100vh;
     padding: 3vh 2vw;
     box-sizing: border-box; }
-    .App div p {
-      margin: 8vh 0; }
   .App #palette {
     width: 12vh;
     height: 54vh;
