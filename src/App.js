@@ -35,14 +35,24 @@ class App extends Component {
         let movedX = 0;
         let movedY = 0;
 
-        ctx.scale(4, 4);
+        canvas.offscreenCanvas = document.createElement('canvas');
+        canvas.offscreenCanvas.width = canvas.width * 2;
+        canvas.offscreenCanvas.height = canvas.height * 2;
+        canvas.offscreenCtx = canvas.offscreenCanvas.getContext('2d');
 
-        originalScale = scale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.002;
+        ctx.imageSmoothingEnabled = false;
+
+        canvas.offscreenCtx.scale(8, 8);
+
+        originalScale = scale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.0005;
 
         axios.get('http://localhost:3001/')
         .then(result => {
             quilt = result.data;
-            setInterval(() => drawCanvas(quilt, ctx), 10);
+            drawOffscreenCanvas(quilt, canvas.offscreenCtx);
+        })
+        .then(() => {
+            setInterval(() => drawCanvas(ctx, canvas.offscreenCanvas), 10);
         })
         .then(() => {
             canvas.onmousedown = () => this.setState({ down: true });
@@ -50,9 +60,11 @@ class App extends Component {
             canvas.onmouseup = event => {
                 if(this.state.moved === false) {
                     let { pixelX, pixelY } = getPixelLocation(event, canvas);
+                    let { b, row } = getQuiltLocation(pixelX, pixelY);
                     let { doc, col } = getDocumentLocation(pixelX, pixelY);
 
                     quilt[doc].color = updatePixel(quilt[doc].color, this.state.color, col);
+                    drawOffscreenCanvas(quilt, canvas.offscreenCtx, b, row, col);
                 }
 
                 movedX = movedY = 0;
@@ -101,7 +113,7 @@ class App extends Component {
 
             window.onresize = () => {
                 scale /= originalScale;
-                originalScale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.002;
+                originalScale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.0005;
                 scale *= originalScale;
             };
         })
@@ -149,6 +161,13 @@ function updatePixel(doc, color, col) {
     return doc.substr(0, col) + color + doc.substr(col + color.length);
 }
 
+function getQuiltLocation(pixelX, pixelY) {
+    let b = Math.floor(pixelY / 50) * 10 + Math.floor(pixelX / 50);
+    let row = pixelY % 50;
+
+    return { b, row };
+}
+
 function getDocumentLocation(x, y) {
     let doc = Math.floor(x / 50) * 50 + Math.floor(y / 50) * 500 + y % 50;
     let col = x % 50;
@@ -160,31 +179,44 @@ function getPixelLocation(event, canvas) {
     let mouseX = event.clientX - canvas.offsetLeft;
     let mouseY = event.clientY - canvas.offsetTop;
 
-    let pixelX = Math.floor(originX + mouseX / scale);
-    let pixelY = Math.floor(originY + mouseY / scale);
+    let pixelX = Math.floor((originX + mouseX / scale) / 4);
+    let pixelY = Math.floor((originY + mouseY / scale) / 4);
 
     return { pixelX, pixelY };
 }
 
-function drawCanvas(result, ctx) {
+function drawCanvas(ctx, offscreenCanvas) {
     ctx.fillStyle = 'white';
-    ctx.fillRect(originX, originY, 2000 / scale, 2000 / scale);
+    ctx.fillRect(originX, originY, 2000, 2000);
 
-    let iterator = 0;
+    ctx.drawImage(offscreenCanvas, 0, 0, 2000, 2000)
+}
 
-    for(let b = 0; b < 100; b++) {
-        for(let row = 0; row < 50; row++) {
-            let rowColors = result[iterator].color.split(',');
+function drawOffscreenCanvas(result, ctx, b = null, row = null, col = null) {
+    if(!b || !row || !col) {
+        let iterator = 0;
 
-            for(let col = 0; col < 50; col++){
-                let loc = getDrawLocation(b, row, col);
+        for(let b = 0; b < 100; b++) {
+            for(let row = 0; row < 50; row++) {
+                let rowColors = result[iterator].color.split(',');
 
-                ctx.fillStyle = `#${rowColors[col]}`;
-                ctx.fillRect(loc.x, loc.y, 1.15, 1.15);
+                for(let col = 0; col < 50; col++){
+                    let loc = getDrawLocation(b, row, col);
+
+                    ctx.fillStyle = `#${rowColors[col]}`;
+                    ctx.fillRect(loc.x, loc.y, 1.15, 1.15);
+                }
+
+                iterator++;
             }
-
-            iterator++;
         }
+    } else {
+        let iterator = b * 50 + row;
+        let rowColors = result[iterator].color.split(',');
+        let loc = getDrawLocation(b, row, col);
+
+        ctx.fillStyle = `#${rowColors[col]}`;
+        ctx.fillRect(loc.x, loc.y, 1, 1);
     }
 }
 
