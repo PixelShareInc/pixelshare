@@ -1,11 +1,21 @@
 import React, {Component} from 'react';
 import './css/App.css';
+import io from 'socket.io-client';
 
 const axios = require('axios');
+const socket = io('http://localhost:3001');
 
-let scale, originalScale, quilt;
+let scale, originalScale, quilt, canvas;
 let originX = 0;
 let originY = 0;
+
+socket.on('serverUpdate', (doc, b, row, col, newColors) => {
+    quilt[doc].color = newColors;
+    newColors = newColors.split(',');
+    let newColor = newColors[col];
+
+    updateOffscreenCanvas(newColor, canvas.offscreenCtx, b, row, col);
+});
 
 class App extends Component {
     constructor(props) {
@@ -14,7 +24,7 @@ class App extends Component {
         this.state = {
             down: false,
             moved: false,
-            color: 'ff0000'
+            color: 'ffffff'
         };
 
         this.onClick = this.onClick.bind(this);
@@ -25,7 +35,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        const canvas = document.getElementById('quilt');
+        canvas = document.getElementById('quilt');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = 2000;
         let height = canvas.height = 2000;
@@ -49,7 +59,7 @@ class App extends Component {
         axios.get('http://localhost:3001/')
         .then(result => {
             quilt = result.data;
-            drawOffscreenCanvas(quilt, canvas.offscreenCtx);
+            initOffscreenCanvas(quilt, canvas.offscreenCtx);
         })
         .then(() => {
             setInterval(() => drawCanvas(ctx, canvas.offscreenCanvas), 10);
@@ -64,7 +74,10 @@ class App extends Component {
                     let { doc, col } = getDocumentLocation(pixelX, pixelY);
 
                     quilt[doc].color = updatePixel(quilt[doc].color, this.state.color, col);
-                    drawOffscreenCanvas(quilt, canvas.offscreenCtx, b, row, col);
+
+                    updateOffscreenCanvas(this.state.color, canvas.offscreenCtx, b, row, col);
+
+                    socket.emit('clientUpdate', doc, b, row, col, quilt[doc].color);
                 }
 
                 movedX = movedY = 0;
@@ -192,14 +205,6 @@ function drawCanvas(ctx, offscreenCanvas) {
     ctx.drawImage(offscreenCanvas, 0, 0, 2000, 2000)
 }
 
-function drawOffscreenCanvas(result, ctx, b = null, row = null, col = null) {
-    if(!b || !row || !col) {
-        initOffscreenCanvas(result, ctx);
-    } else {
-        updateOffscreenCanvas(result, ctx, b, row, col);
-    }
-}
-
 function initOffscreenCanvas(result, ctx) {
     let iterator = 0;
 
@@ -219,12 +224,10 @@ function initOffscreenCanvas(result, ctx) {
     }
 }
 
-function updateOffscreenCanvas(result, ctx, b, row, col) {
-    let iterator = b * 50 + row;
-    let rowColors = result[iterator].color.split(',');
+function updateOffscreenCanvas(color, ctx, b, row, col) {
     let loc = getDrawLocation(b, row, col);
 
-    ctx.fillStyle = `#${rowColors[col]}`;
+    ctx.fillStyle = `#${color}`;
     ctx.fillRect(loc.x, loc.y, 1, 1);
 }
 
