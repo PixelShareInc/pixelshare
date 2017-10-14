@@ -73,11 +73,13 @@ class App extends Component {
                     let { b, row } = getQuiltLocation(pixelX, pixelY);
                     let { doc, col } = getDocumentLocation(pixelX, pixelY);
 
-                    quilt[doc].color = updatePixel(quilt[doc].color, this.state.color, col);
+                    if(pixelX >= 0 && pixelX < 500 && pixelY >= 0 && pixelY < 500) {
+                        quilt[doc].color = updatePixel(quilt[doc].color, this.state.color, col);
 
-                    updateOffscreenCanvas(this.state.color, canvas.offscreenCtx, b, row, col);
+                        updateOffscreenCanvas(this.state.color, canvas.offscreenCtx, b, row, col);
 
-                    socket.emit('clientUpdate', doc, b, row, col, quilt[doc].color);
+                        socket.emit('clientUpdate', doc, b, row, col, quilt[doc].color);
+                    }
                 }
 
                 movedX = movedY = 0;
@@ -123,6 +125,8 @@ class App extends Component {
                     visibleHeight = height / scale;
                 }
             }
+
+            canvas.onmouseleave = () => this.setState({ down: false, moved: true });
 
             window.onresize = () => {
                 scale /= originalScale;
