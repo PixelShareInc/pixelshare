@@ -37,10 +37,8 @@ class App extends Component {
     componentDidMount() {
         canvas = document.getElementById('quilt');
         const ctx = canvas.getContext('2d');
-        let width = canvas.width = 2000;
-        let height = canvas.height = 2000;
-        let visibleWidth = width;
-        let visibleHeight = height;
+        canvas.width = 2000;
+        canvas.height = 2000;
         let zoomIntensity = 0.2;
         let movedX = 0;
         let movedY = 0;
@@ -121,8 +119,6 @@ class App extends Component {
                     ctx.translate(-originX, -originY);
 
                     scale *= zoom;
-                    visibleWidth = width / scale;
-                    visibleHeight = height / scale;
                 }
             }
 
