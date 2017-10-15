@@ -1,3 +1,7 @@
+@font-face {
+  font-family: karmaticArcade;
+  src: url("../fonts/karmatic-arcade.ttf"); }
+
 .App {
   width: 100vw;
   height: 100vh;
@@ -6,23 +10,32 @@
   align-items: center;
   margin: 0;
   padding: 0; }
-  .App div {
+  .App > div {
     width: calc(100vw / 2 - 100vh / 2);
     height: 100vh;
-    padding: 3vh 2vw;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    background-image: url("../images/tile.png");
+    background-size: 100%; }
+  .App .splash {
+    background-position: right top; }
+    .App .splash h1 {
+      -webkit-margin-before: 0;
+      -webkit-margin-after: 0;
+      padding: 10%;
+      font-family: karmaticArcade;
+      font-size: calc(100vw / 12 - 100vh / 12);
+      mask-image: linear-gradient(top, black, rgba(0, 0, 0, 0.7) 50%, black); }
+  .App .palette {
+    background-position: left top; }
   .App #palette {
-    width: 12vh;
-    height: 54vh;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    padding: 0; }
+    width: 7vw;
+    max-width: 80%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin: 10%;
+    box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6); }
     .App #palette .color {
-      width: 6vh;
-      height: 6vh;
-      padding: 0; }
+      padding-top: 100%; }
     .App #palette #color247a23 {
       background-color: #247a23; }
     .App #palette #color30bf2e {
@@ -62,7 +75,7 @@
   .App #quilt {
     width: 100vh;
     height: 100vh;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
     margin: 0;
     padding: 0; }

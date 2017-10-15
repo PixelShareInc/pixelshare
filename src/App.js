@@ -335,6 +335,7 @@ class App extends Component {
         return (
             <div className='App'>
                 <div className='splash'>
+                    <h1>Pixel <br /> Share</h1>
                 </div>
                 <canvas id='quilt'></canvas>
                 <div className='palette'>
