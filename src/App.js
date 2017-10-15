@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './css/App.css';
 import io from 'socket.io-client';
 import axios from 'axios';
+import { ChromePicker } from 'react-color';
 
 const socket = io('http://localhost:3001');
 
@@ -39,6 +40,8 @@ class App extends Component {
         this._onMouseWheel = this._onMouseWheel.bind(this);
         this._onMouseLeave = this._onMouseLeave.bind(this);
         this._onMouseEnter = this._onMouseEnter.bind(this);
+        this._onCurrentClick = this._onCurrentClick.bind(this);
+        this.onPickerChange = this.onPickerChange.bind(this);
         this._onResize = this._onResize.bind(this);
         this._socketUpdate = this._socketUpdate.bind(this);
         this._getPixelLocation = this._getPixelLocation.bind(this);
@@ -133,6 +136,7 @@ class App extends Component {
     _startListeners() {
         return new Promise((resolve, reject) => {
             let canvas = this.state.canvas;
+            let current = document.getElementById('current');
 
             canvas.onmousedown = this._onMouseDown;
             canvas.onmouseup = this._onMouseUp;
@@ -140,6 +144,7 @@ class App extends Component {
             canvas.onmousewheel = this._onMouseWheel;
             canvas.onmouseleave = this._onMouseLeave;
             canvas.onmouseenter = this._onMouseEnter;
+            current.onclick = this._onCurrentClick;
             window.onresize = this._onResize;
             socket.on('serverUpdate', this._socketUpdate);
 
@@ -153,6 +158,9 @@ class App extends Component {
 
     _onMouseUp(event) {
         if(this.state.moved === false) {
+            let picker = document.getElementsByClassName('picker-card')[0];
+            if(picker.style.visibility === 'visible') picker.style.visibility = 'hidden';
+
             let { pixelX, pixelY } = this._getPixelLocation(event);
             let { b, row } = this._getQuiltLocation(pixelX, pixelY);
             let { doc, col } = this._getDocumentLocation(pixelX, pixelY);
@@ -234,6 +242,20 @@ class App extends Component {
 
     _onMouseEnter() {
         this.setState({ moved: false });
+    }
+
+    _onCurrentClick(event) {
+        event.preventDefault();
+
+        let picker = document.getElementsByClassName('picker-card')[0];
+
+        picker.style.visibility = picker.style.visibility !== 'visible' ? 'visible' : 'hidden';
+    }
+
+    onPickerChange(color) {
+        color = color.hex.slice(1);
+        console.log(color);
+        this.setState({ color: color });
     }
 
     _onResize() {
@@ -328,6 +350,9 @@ class App extends Component {
         .then(this._initCanvas)
         .then(this._startDrawLoop)
         .then(this._startListeners)
+        .then(() => {
+
+        })
         .catch(err => console.error(err));
     }
 
@@ -340,6 +365,10 @@ class App extends Component {
                 <canvas id='quilt'></canvas>
                 <div className='palette'>
                     <Palette onClick={this.onClick} />
+                    <div className='picker'>
+                        <input type='color' id='current' value={`#${this.state.color}`} />
+                        <ChromePicker className='picker-card' disableAlpha={true} color={`#${this.state.color}`} onChangeComplete={this.onPickerChange} />
+                    </div>
                 </div>
             </div>
         );

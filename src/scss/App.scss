@@ -34,6 +34,21 @@
 
     .palette {
         background-position: left top;
+        display: flex;
+
+        .picker {
+            margin: 5%;
+        }
+
+        input[type='color'] {
+            width: 7vw;
+            height: 7vw;
+        }
+
+        .picker-card {
+            width: 90% !important;
+            visibility: hidden;
+        }
     }
 
     #palette {
@@ -41,10 +56,12 @@
         max-width: 80%;
         display: grid;
         grid-template-columns: 50% 50%;
-        margin: 10%;
+        margin: 5%;
+        margin-bottom: auto;
         box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
 
         .color {
+            height: 0;
             padding-top: 100%;
         }
 
