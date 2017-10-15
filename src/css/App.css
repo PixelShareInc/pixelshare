@@ -1,6 +1,6 @@
 @font-face {
   font-family: karmaticArcade;
-  src: url("../fonts/karmatic-arcade.ttf"); }
+  src: url("../fonts/karmatic-arcade.ttf") formate("truetype"); }
 
 .App {
   width: 100vw;
@@ -18,13 +18,13 @@
     background-size: 100%; }
   .App .splash {
     background-position: right top; }
-    .App .splash h1 {
+    .App .splash p {
       -webkit-margin-before: 0;
       -webkit-margin-after: 0;
       padding: 10%;
       font-family: karmaticArcade;
       font-size: calc(100vw / 12 - 100vh / 12);
-      mask-image: linear-gradient(top, black, rgba(0, 0, 0, 0.7) 50%, black); }
+      -webkit-mask-image: linear-gradient(to top, black, rgba(0, 0, 0, 0.7) 50%, black); }
   .App .palette {
     background-position: left top;
     display: flex; }
