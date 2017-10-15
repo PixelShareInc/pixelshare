@@ -268,8 +268,14 @@ class App extends Component {
         let mouseX = event.clientX - canvas.offsetLeft;
         let mouseY = event.clientY - canvas.offsetTop;
 
-        let pixelX = Math.floor((this.state.originX + mouseX / this.state.scale) / 4);
-        let pixelY = Math.floor((this.state.originY + mouseY / this.state.scale) / 4);
+        let pixelX = this.state.originX + mouseX / this.state.scale;
+        let pixelY = this.state.originY + mouseY / this.state.scale;
+        // let pixelX = Math.floor((this.state.originX + mouseX / this.state.scale) / 4);
+        // let pixelY = Math.floor((this.state.originY + mouseY / this.state.scale) / 4);
+        //
+        // console.log(pixelX, pixelY);
+        //
+        [pixelX, pixelY] = [pixelX, pixelY].map(pixel => Math.floor(pixel / 4));
 
         return { pixelX, pixelY };
     }
