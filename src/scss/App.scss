@@ -3,6 +3,15 @@
     src: url('../fonts/karmatic-arcade.ttf') format('truetype');
 }
 
+@mixin background-gradient($from, $to) {
+    background: $to;
+    background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+    background: -webkit-linear-gradient(top, $from, $to);
+    background: -moz-linear-gradient(top, $from, $to);
+    background: -ms-linear-gradient(top, $from, $to);
+    background: -o-linear-gradient(top, $from, $to);
+}
+
 .App {
     width: 100vw; height: 100vh;
     display: flex;
@@ -32,12 +41,51 @@
         }
     }
 
+    input[type=button] {
+        width: 100%;
+        border: 1px solid #888;
+        @include background-gradient(#ccc, #fff);
+        text-shadow: rgba(0,0,0,.2) 0 1px 0;
+        color: black;
+        font-size: 0.8vw;
+        font-family: Georgia, serif;
+    }
+
+    input[type=button]:hover {
+        @include background-gradient(#999, #ccc);
+        border: 1px solid #555;
+    }
+
+    input[type=button]:active {
+        @include background-gradient(#888, #bbb);
+        border: 1px solid #444;
+    }
+
+    input[type=button]:focus {
+        outline: 0;
+    }
+
     .palette {
         background-position: left top;
         display: flex;
 
         .picker {
             margin: 5%;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+
+                input[type=button] {
+                    width: calc(7vw + 6px);
+                    border-bottom: none;
+                }
+
+                input[type=button]:hover, input[type=button]:active {
+                    border-bottom: none;
+                }
+            }
         }
 
         input[type='color'] {
@@ -51,19 +99,28 @@
         }
     }
 
-    #palette {
+    #paletteContainer {
         width: 7vw;
         max-width: 80%;
-        display: grid;
-        grid-template-columns: 50% 50%;
         margin: 5%;
         margin-bottom: auto;
-        // box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
-        // background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAaUlEQVQoU12PCw2AMAwFbzaGDLCBDXSgAxvYABlgY+RgWxqaLOnn+vqWgBE4+WIFNuCudUk1EZorYCsDF5Aa4OYelAowqCTg0GeodLhZ62yiXL8JTNFTJ9vNv6cG9JvhN68nAYdRaYmeHot9F9X2eFD0AAAAAElFTkSuQmCC) repeat;
 
-        .color {
-            height: 0;
-            padding-top: 100%;
+        #palette {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            // box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+            // background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAaUlEQVQoU12PCw2AMAwFbzaGDLCBDXSgAxvYABlgY+RgWxqaLOnn+vqWgBE4+WIFNuCudUk1EZorYCsDF5Aa4OYelAowqCTg0GeodLhZ62yiXL8JTNFTJ9vNv6cG9JvhN68nAYdRaYmeHot9F9X2eFD0AAAAAElFTkSuQmCC) repeat;
+
+            .color {
+                height: 0;
+                padding-top: 100%;
+            }
+        }
+
+        #paletteButtons {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
     }
 

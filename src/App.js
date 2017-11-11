@@ -73,6 +73,8 @@ class App extends Component {
         this.onClick = this.onClick.bind(this);
         this._addColor = this._addColor.bind(this);
         this._rgbToHex = this._rgbToHex.bind(this);
+        this.savePalette = this.savePalette.bind(this);
+        this.clearPalette = this.clearPalette.bind(this);
     }
 
     _init() {
@@ -92,6 +94,9 @@ class App extends Component {
             offscreenCtx.scale(8, 8);
 
             let scale = window.getComputedStyle(canvas, null).getPropertyValue('width').slice(0, -2) * 0.0005;
+
+            if(localStorage.getItem('palette'))
+                this.setState({ palette: localStorage.getItem('palette').split(',') });
 
             this.setState({
                 canvas: canvas,
@@ -362,7 +367,8 @@ class App extends Component {
     }
 
     onClick(event) {
-        this.setState({ color: this._rgbToHex(event.target.style.backgroundColor) });
+        if(event.target.style.backgroundColor)
+            this.setState({ color: this._rgbToHex(event.target.style.backgroundColor) });
     }
 
     _addColor() {
@@ -374,8 +380,6 @@ class App extends Component {
                 return { palette };
             });
         }
-
-        console.log(this.state.palette);
     }
 
     _rgbToHex(rgb) {
@@ -390,6 +394,36 @@ class App extends Component {
         });
 
         return hex.join('');
+    }
+
+    savePalette() {
+        localStorage.setItem('palette', this.state.palette.toString());
+    }
+
+    clearPalette() {
+        localStorage.removeItem('palette');
+        this.setState({
+            palette: [
+                '247a23',
+                '30bf2e',
+                '269e8c',
+                '205988',
+                '37abe4',
+                '8300dc',
+                'ac0f5f',
+                'f42618',
+                'e9671d',
+                'f29221',
+                'ff78e9',
+                'ffcd94',
+                'f0ee4d',
+                '8b4513',
+                'ffffff',
+                'd4d4d4',
+                '868686',
+                '000000'
+            ]
+        });
     }
 
     componentDidMount() {
@@ -409,11 +443,11 @@ class App extends Component {
                 </div>
                 <canvas id='quilt'></canvas>
                 <div className='palette'>
-                    <Palette palette={this.state.palette} onClick={this.onClick} />
+                    <Palette palette={this.state.palette} onClick={this.onClick} savePalette={this.savePalette} clearPalette={this.clearPalette} />
                     <div className='picker'>
                         <div>
+                            <input type='button' id='add' value='Add to Palette' onClick={this._addColor} />
                             <input type='color' id='current' value={`#${this.state.color}`} readOnly />
-                            <input type='button' id='add' value='+' onClick={this._addColor} />
                         </div>
                         <ChromePicker className='picker-card' disableAlpha={true} color={`#${this.state.color}`} onChangeComplete={this.onPickerChange} />
                     </div>
@@ -423,18 +457,24 @@ class App extends Component {
     }
 }
 
-const Palette = ({ palette, onClick }) =>
-    <div id='palette' onClick={onClick}>
-        {palette.length > 1 ?
-            palette.map(color => {
-                let id = `color${color}`;
-                let style = {
-                    backgroundColor: '#' + color
-                }
-                return <div key={id} className='color' style={style}></div>
-            })
-            : null
-        }
+const Palette = ({ palette, onClick, savePalette, clearPalette }) =>
+    <div id='paletteContainer'>
+        <div id='paletteButtons'>
+            <input type='button' id='save' value='Save Palette' onClick={savePalette} />
+            <input type='button' id='clear' value='Clear Palette' onClick={clearPalette} />
+        </div>
+        <div id='palette' onClick={onClick}>
+            {palette.length > 1 ?
+                palette.map(color => {
+                    let id = `color${color}`;
+                    let style = {
+                        backgroundColor: '#' + color
+                    }
+                    return <div key={id} className='color' style={style}></div>
+                })
+                : null
+            }
+        </div>
     </div>
 
 export default App;
