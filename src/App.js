@@ -75,6 +75,7 @@ class App extends Component {
         this._rgbToHex = this._rgbToHex.bind(this);
         this.savePalette = this.savePalette.bind(this);
         this.clearPalette = this.clearPalette.bind(this);
+        this._checkPickerVisibility = this._checkPickerVisibility.bind(this);
     }
 
     _init() {
@@ -160,6 +161,15 @@ class App extends Component {
         requestAnimationFrame(this._drawCanvas);
     }
 
+    _checkPickerVisibility(event) {
+        let picker = document.getElementsByClassName('picker-card')[0];
+        let swatch = document.getElementById('current');
+
+        if(!picker.contains(event.target) && event.target !== swatch) {
+            if(picker.style.visibility === 'visible') picker.style.visibility = 'hidden';
+        }
+    }
+
     _startListeners() {
         return new Promise((resolve, reject) => {
             let canvas = this.state.canvas;
@@ -173,6 +183,7 @@ class App extends Component {
             canvas.onmouseenter = this._onMouseEnter;
             current.onclick = this._onCurrentClick;
             window.onresize = this._onResize;
+            window.onclick = this._checkPickerVisibility;
             socket.on('serverUpdate', this._socketUpdate);
 
             resolve();
@@ -185,9 +196,6 @@ class App extends Component {
 
     _onMouseUp(event) {
         if(this.state.moved === false) {
-            let picker = document.getElementsByClassName('picker-card')[0];
-            if(picker.style.visibility === 'visible') picker.style.visibility = 'hidden';
-
             let { pixelX, pixelY } = this._getPixelLocation(event);
             let { b, row } = this._getQuiltLocation(pixelX, pixelY);
             let { doc, col } = this._getDocumentLocation(pixelX, pixelY);
@@ -281,7 +289,7 @@ class App extends Component {
 
     onPickerChange(color) {
         color = color.hex.slice(1);
-        this.setState({ color: color });
+        this.setState({ color });
     }
 
     _onResize() {
