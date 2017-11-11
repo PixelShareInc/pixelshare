@@ -25,7 +25,27 @@ class App extends Component {
             movedY: 0,
             quilt: null,
             originX: 0,
-            originY: 0
+            originY: 0,
+            palette: [
+                '247a23',
+                '30bf2e',
+                '269e8c',
+                '205988',
+                '37abe4',
+                '8300dc',
+                'ac0f5f',
+                'f42618',
+                'e9671d',
+                'f29221',
+                'ff78e9',
+                'ffcd94',
+                'f0ee4d',
+                '8b4513',
+                'ffffff',
+                'd4d4d4',
+                '868686',
+                '000000'
+            ]
         };
 
         this._init = this._init.bind(this);
@@ -51,6 +71,8 @@ class App extends Component {
         this._updateOffscreenCanvas = this._updateOffscreenCanvas.bind(this);
         this._getDrawLocation = this._getDrawLocation.bind(this);
         this.onClick = this.onClick.bind(this);
+        this._addColor = this._addColor.bind(this);
+        this._rgbToHex = this._rgbToHex.bind(this);
     }
 
     _init() {
@@ -254,7 +276,6 @@ class App extends Component {
 
     onPickerChange(color) {
         color = color.hex.slice(1);
-        console.log(color);
         this.setState({ color: color });
     }
 
@@ -341,7 +362,34 @@ class App extends Component {
     }
 
     onClick(event) {
-        this.setState({ color: event.target.id.slice(5) });
+        this.setState({ color: this._rgbToHex(event.target.style.backgroundColor) });
+    }
+
+    _addColor() {
+        if(!this.state.palette.includes(this.state.color)) {
+            this.setState(prevState => {
+                let palette = this.state.palette.length >= 20 ? prevState.palette.slice(1) : prevState.palette;
+                palette.push(this.state.color);
+
+                return { palette };
+            });
+        }
+
+        console.log(this.state.palette);
+    }
+
+    _rgbToHex(rgb) {
+        rgb = rgb.replace(/\s+/g, '');
+        rgb = rgb.split('(')[1].split(')')[0];
+
+        let hex = rgb.split(',');
+
+        hex = hex.map(color => {
+            color = parseInt(color, 10).toString(16);
+            return color.length === 1 ? '0' + color : color;
+        });
+
+        return hex.join('');
     }
 
     componentDidMount() {
@@ -350,9 +398,6 @@ class App extends Component {
         .then(this._initCanvas)
         .then(this._startDrawLoop)
         .then(this._startListeners)
-        .then(() => {
-
-        })
         .catch(err => console.error(err));
     }
 
@@ -364,9 +409,12 @@ class App extends Component {
                 </div>
                 <canvas id='quilt'></canvas>
                 <div className='palette'>
-                    <Palette onClick={this.onClick} />
+                    <Palette palette={this.state.palette} onClick={this.onClick} />
                     <div className='picker'>
-                        <input type='color' id='current' value={`#${this.state.color}`} />
+                        <div>
+                            <input type='color' id='current' value={`#${this.state.color}`} readOnly />
+                            <input type='button' id='add' value='+' onClick={this._addColor} />
+                        </div>
                         <ChromePicker className='picker-card' disableAlpha={true} color={`#${this.state.color}`} onChangeComplete={this.onPickerChange} />
                     </div>
                 </div>
@@ -375,26 +423,18 @@ class App extends Component {
     }
 }
 
-const Palette = ({onClick}) =>
+const Palette = ({ palette, onClick }) =>
     <div id='palette' onClick={onClick}>
-        <div className='color' id='color247a23'></div>
-        <div className='color' id='color30bf2e'></div>
-        <div className='color' id='color269e8c'></div>
-        <div className='color' id='color205988'></div>
-        <div className='color' id='color37abe4'></div>
-        <div className='color' id='color8300dc'></div>
-        <div className='color' id='colorac0f5f'></div>
-        <div className='color' id='colorf42618'></div>
-        <div className='color' id='colore9671d'></div>
-        <div className='color' id='colorf29221'></div>
-        <div className='color' id='colorff78e9'></div>
-        <div className='color' id='colorffcd94'></div>
-        <div className='color' id='colorf0ee4d'></div>
-        <div className='color' id='color8b4513'></div>
-        <div className='color' id='colorffffff'></div>
-        <div className='color' id='colord4d4d4'></div>
-        <div className='color' id='color868686'></div>
-        <div className='color' id='color000000'></div>
+        {palette.length > 1 ?
+            palette.map(color => {
+                let id = `color${color}`;
+                let style = {
+                    backgroundColor: '#' + color
+                }
+                return <div key={id} className='color' style={style}></div>
+            })
+            : null
+        }
     </div>
 
 export default App;
