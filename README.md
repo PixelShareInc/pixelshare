@@ -81,7 +81,7 @@ $ gulp
 
 ##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://cosmicjs.com/uploads/9c2d95d0-27b0-11e7-b6ae-8108cf4caa96-react.svg" height="50" align="top">](https://reactjs.org)
 ##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="http://sass-lang.com/assets/img/styleguide/color-1c4aab2b.png" height="50" align="top">](http://sass-lang.com)
-##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://jwt.io/assets/logo.svg" height="50" align="top">](http://www.jwt.io)
+##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAomAAAAJDQ1YTIwYmUxLWE2ZmYtNDI3NS04YmI5LTI2OTRiNzM4N2M1YQ.png" height="50" align="top">](http://www.socket.io)
 ##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Node.js_logo_2015.svg/591px-Node.js_logo_2015.svg.png" height="50" align="top">](https://nodejs.org)
 ##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="http://www.amt.in/img/services/express.png" height="50" align="top">](https://expressjs.com)
 ##### &emsp;&emsp;&emsp;&emsp;&emsp; [<img src="https://webassets.mongodb.com/_com_assets/cms/MongoDB-Logo-5c3a7405a85675366beb3a5ec4c032348c390b3f142f5e6dddf1d78e2df5cb5c.png" height="50" align="top">](https://mongodb.com)
