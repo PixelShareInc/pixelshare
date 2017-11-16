@@ -67,6 +67,8 @@
 
     input[type=button]:focus {
         outline: 0;
+        border: 1px solid #545454;
+        border-bottom: none;
     }
 
     .palette {
