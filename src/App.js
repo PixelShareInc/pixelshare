@@ -72,7 +72,6 @@ class App extends Component {
         this.onClick = this.onClick.bind(this);
         this._addColor = this._addColor.bind(this);
         this._rgbToHex = this._rgbToHex.bind(this);
-        this.savePalette = this.savePalette.bind(this);
         this.clearPalette = this.clearPalette.bind(this);
         this._checkPickerVisibility = this._checkPickerVisibility.bind(this);
     }
@@ -390,6 +389,8 @@ class App extends Component {
                 let palette = this.state.palette.length >= 20 ? prevState.palette.slice(1) : prevState.palette;
                 palette.push(this.state.color);
 
+                localStorage.setItem('palette', palette.toString());
+
                 return { palette };
             });
         }
@@ -407,10 +408,6 @@ class App extends Component {
         });
 
         return hex.join('');
-    }
-
-    savePalette() {
-        localStorage.setItem('palette', this.state.palette.toString());
     }
 
     clearPalette() {
@@ -473,8 +470,7 @@ class App extends Component {
 const Palette = ({ palette, onClick, savePalette, clearPalette }) =>
     <div id='paletteContainer'>
         <div id='paletteButtons'>
-            <input type='button' id='save' value='Save Palette' onClick={savePalette} />
-            <input type='button' id='clear' value='Clear Palette' onClick={clearPalette} />
+            <input type='button' value='Clear Palette' onClick={clearPalette} />
         </div>
         <div id='palette' onClick={onClick}>
             {palette.length > 1 ?

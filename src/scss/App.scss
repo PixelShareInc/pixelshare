@@ -44,6 +44,8 @@
     input[type=button] {
         width: 100%;
         border: 1px solid #888;
+        border-radius: 0;
+        border-bottom: none;
         @include background-gradient(#ccc, #fff);
         text-shadow: rgba(0,0,0,.2) 0 1px 0;
         color: black;
@@ -54,11 +56,13 @@
     input[type=button]:hover {
         @include background-gradient(#999, #ccc);
         border: 1px solid #555;
+        border-bottom: none;
     }
 
     input[type=button]:active {
         @include background-gradient(#888, #bbb);
         border: 1px solid #444;
+        border-bottom: none;
     }
 
     input[type=button]:focus {
@@ -79,11 +83,6 @@
 
                 input[type=button] {
                     width: calc(7vw + 6px);
-                    border-bottom: none;
-                }
-
-                input[type=button]:hover, input[type=button]:active {
-                    border-bottom: none;
                 }
             }
         }
@@ -108,8 +107,6 @@
         #palette {
             display: grid;
             grid-template-columns: 50% 50%;
-            // box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
-            // background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAaUlEQVQoU12PCw2AMAwFbzaGDLCBDXSgAxvYABlgY+RgWxqaLOnn+vqWgBE4+WIFNuCudUk1EZorYCsDF5Aa4OYelAowqCTg0GeodLhZ62yiXL8JTNFTJ9vNv6cG9JvhN68nAYdRaYmeHot9F9X2eFD0AAAAAElFTkSuQmCC) repeat;
 
             .color {
                 height: 0;
