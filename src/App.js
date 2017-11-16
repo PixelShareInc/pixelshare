@@ -4,7 +4,8 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import { ChromePicker } from 'react-color';
 
-const socket = io('http://localhost:3001');
+const url = process.env.REACT_APP_URL || 'http://localhost:3001';
+const socket = io(url);
 
 class App extends Component {
     constructor(props) {
@@ -114,7 +115,7 @@ class App extends Component {
     }
 
     _getCanvas() {
-        return axios.get('http://localhost:3001/');
+        return axios.get(url);
     }
 
     _initCanvas(result) {
