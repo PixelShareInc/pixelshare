@@ -467,7 +467,7 @@ class App extends Component {
     }
 }
 
-const Palette = ({ palette, onClick, savePalette, clearPalette }) =>
+const Palette = ({ palette, onClick, clearPalette }) =>
     <div id='paletteContainer'>
         <div id='paletteButtons'>
             <input type='button' value='Clear Palette' onClick={clearPalette} />
