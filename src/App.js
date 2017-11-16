@@ -13,7 +13,6 @@ class App extends Component {
 
         this.state = {
             down: false,
-            moved: false,
             color: 'ffffff',
             canvas: null,
             ctx: null,
@@ -60,7 +59,6 @@ class App extends Component {
         this._onMouseMove = this._onMouseMove.bind(this);
         this._onMouseWheel = this._onMouseWheel.bind(this);
         this._onMouseLeave = this._onMouseLeave.bind(this);
-        this._onMouseEnter = this._onMouseEnter.bind(this);
         this._onCurrentClick = this._onCurrentClick.bind(this);
         this.onPickerChange = this.onPickerChange.bind(this);
         this._onResize = this._onResize.bind(this);
@@ -181,7 +179,6 @@ class App extends Component {
             canvas.onmousemove = this._onMouseMove;
             canvas.onmousewheel = this._onMouseWheel;
             canvas.onmouseleave = this._onMouseLeave;
-            canvas.onmouseenter = this._onMouseEnter;
             current.onclick = this._onCurrentClick;
             window.onresize = this._onResize;
             window.onclick = this._checkPickerVisibility;
@@ -191,12 +188,30 @@ class App extends Component {
         });
     }
 
-    _onMouseDown() {
-        this.setState({ down: true });
+    _onMouseDown(event) {
+        let canvas = this.state.canvas;
+
+        let mouseX = event.clientX - canvas.offsetLeft;
+        let mouseY = event.clientY - canvas.offsetTop;
+
+        this.setState({
+            movedX: mouseX,
+            movedY: mouseY,
+            down: true
+        });
     }
 
     _onMouseUp(event) {
-        if(this.state.moved === false) {
+        let canvas = this.state.canvas;
+
+        let mouseX = event.clientX - canvas.offsetLeft;
+        let mouseY = event.clientY - canvas.offsetTop;
+
+        let moved =
+            Math.abs(mouseX - this.state.movedX) > 30 ||
+            Math.abs(mouseY - this.state.movedY) > 30;
+
+        if(!moved) {
             let { pixelX, pixelY } = this._getPixelLocation(event);
             let { b, row } = this._getQuiltLocation(pixelX, pixelY);
             let { doc, col } = this._getDocumentLocation(pixelX, pixelY);
@@ -212,7 +227,6 @@ class App extends Component {
 
         this.setState({
             down: false,
-            moved: false,
             movedX: 0,
             movedY: 0
         });
@@ -226,17 +240,11 @@ class App extends Component {
             this.setState(prevState => {
                 return {
                     originX: prevState.originX - event.movementX / scale,
-                    originY: prevState.originY - event.movementY / scale,
-                    movedX: prevState.movedX + event.movementX / scale,
-                    movedY: prevState.movedY + event.movementY / scale
+                    originY: prevState.originY - event.movementY / scale
                 };
             });
 
             ctx.translate(event.movementX / scale, event.movementY / scale);
-        }
-
-        if(this.state.movedX > 1 || this.state.movedY > 1) {
-            this.setState({ moved: true });
         }
     }
 
@@ -273,11 +281,7 @@ class App extends Component {
     }
 
     _onMouseLeave() {
-        this.setState({ down: false, moved: true });
-    }
-
-    _onMouseEnter() {
-        this.setState({ moved: false });
+        this.setState({ down: false });
     }
 
     _onCurrentClick(event) {
