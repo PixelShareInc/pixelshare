@@ -1,3 +1,13 @@
+checks:
+    file-lines:
+        config:
+            threshold: 500
+    method-count:
+        config:
+            threshold: 30
+    method-lines:
+        config:
+            threshold: 75
 engines:
     eslint:
         enabled: true
