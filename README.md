@@ -2,12 +2,12 @@
 
 # [PixelShare](https://github.com/PixelShareInc/pixelshare "PixelShare")
 
-[![Build Status](https://travis-ci.org/PixelShareInc/pixelshare.svg?branch=master)](https://travis-ci.org/PixelShareInc/pixelshare)
-[![GitHub release](https://img.shields.io/github/release/PixelShareInc/pixelshare.svg)]()
-[![Code Climate](https://codeclimate.com/github/PixelShareInc/pixelshare/badges/gpa.svg)](https://codeclimate.com/github/PixelShareInc/pixelshare)
-[![Issue Count](https://codeclimate.com/github/PixelShareInc/pixelshare/badges/issue_count.svg)](https://codeclimate.com/github/PixelShareInc/pixelshare)
-[![Dependencies Status](https://david-dm.org/PixelShareInc/pixelshare.svg)](https://david-dm.org/PixelShareInc/pixelshare)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FPixelShareInc%2Fpixelshare.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FPixelShareInc%2Fpixelshare?ref=badge_shield)
+[![Build Status](https://travis-ci.org/derekkramer/pixelshare.svg?branch=master)](https://travis-ci.org/derekkramer/pixelshare)
+[![GitHub release](https://img.shields.io/github/release/derekkramer/pixelshare.svg)]()
+[![Code Climate](https://codeclimate.com/github/derekkramer/pixelshare/badges/gpa.svg)](https://codeclimate.com/github/PixelShareInc/pixelshare)
+[![Issue Count](https://codeclimate.com/github/derekkramer/pixelshare/badges/issue_count.svg)](https://codeclimate.com/github/derekkramer/pixelshare)
+[![Dependencies Status](https://david-dm.org/derekkramer/pixelshare.svg)](https://david-dm.org/derekkramer/pixelshare)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fderekkramer%2Fpixelshare.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fderekkramer%2Fpixelshare?ref=badge_shield)
 
 ---
 
