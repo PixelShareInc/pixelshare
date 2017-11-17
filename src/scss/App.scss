@@ -3,6 +3,11 @@
     src: url('../fonts/karmatic-arcade.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: tokyo;
+    src: url('../fonts/mplus-2p-thin-sub.ttf') format('truetype');
+}
+
 @mixin background-gradient($from, $to) {
     background: $to;
     background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
@@ -26,6 +31,117 @@
         box-sizing: border-box;
         background-image: url('../images/tile.png');
         background-size: 100%;
+    }
+
+    #intro {
+        width: 70vw; height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-size: 30%;
+        border: 1px solid #888;
+        filter: brightness(95%);
+        padding: 5%;
+        font-family: tokyo;
+        font-weight: bold;
+        font-size: 1.8vw;
+        z-index: 1;
+
+        span {
+            padding-left: 1%;
+            font-family: karmaticArcade;
+            font-size: 2vw;
+            -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,.7) 50%, rgba(0,0,0,1));
+        }
+
+        #title {
+            font-size: 2.8vw;
+        }
+
+        #description {
+            width: 100%;
+        }
+
+        #show {
+            width: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 7vh 0 2vh 0;
+
+            input[type=checkbox] {
+                outline: none;
+                position: relative;
+                width: 2%; height: 2%;
+            	-webkit-appearance: none;
+            	background-color: #fafafa;
+            	border: 1px solid #cacece;
+            	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+            	padding: 5%;
+                margin-right: 5%;
+            	border-radius: 3px;
+            	display: inline-block;
+            }
+
+            input[type=checkbox]:active, input[type=checkbox]:checked:active {
+                outline: none;
+            	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+            }
+
+            input[type=checkbox]:checked {
+                outline: none;
+            	background-color: #e9ecee;
+            	border: 1px solid #adb8c0;
+            	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+            	color: #99a1a7;
+            }
+
+            input[type=checkbox]:checked:after {
+                outline: none;
+            	content: '\2714';
+            	font-size: 14px;
+            	position: absolute;
+            	top: 0px;
+            	left: 3px;
+            	color: #99a1a7;
+            }
+
+            span {
+                font-family: tokyo;
+                font-size: 1.2vw;
+            }
+        }
+
+        #showEnter {
+            width: 20%;
+
+            input[type=button] {
+                border-bottom: 1px solid #888;
+                @include background-gradient(#ccc, #fff);
+                text-shadow: rgba(0,0,0,.2) 0 1px 0;
+                color: black;
+                font-size: 1.5vw;
+            }
+
+            input[type=button]:hover {
+                @include background-gradient(#999, #ccc);
+                border: 1px solid #555;
+            }
+
+            input[type=button]:active {
+                @include background-gradient(#888, #bbb);
+                border: 1px solid #444;
+            }
+
+            input[type=button]:focus {
+                outline: 0;
+                border: 1px solid #545454;
+            }
+        }
     }
 
     #loading {
@@ -60,7 +176,8 @@
         text-shadow: rgba(0,0,0,.2) 0 1px 0;
         color: black;
         font-size: 0.8vw;
-        font-family: Georgia, serif;
+        font-family: tokyo;
+        font-weight: bold;
     }
 
     input[type=button]:hover {

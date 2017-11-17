@@ -28,6 +28,7 @@ class App extends Component {
             originX: 0,
             originY: 0,
             isLoading: true,
+            intro: true,
             palette: [
                 '247a23',
                 '30bf2e',
@@ -76,6 +77,7 @@ class App extends Component {
         this._rgbToHex = this._rgbToHex.bind(this);
         this.clearPalette = this.clearPalette.bind(this);
         this._checkPickerVisibility = this._checkPickerVisibility.bind(this);
+        this.onIntroClick = this.onIntroClick.bind(this);
     }
 
     _init() {
@@ -98,6 +100,9 @@ class App extends Component {
 
             if(localStorage.getItem('palette'))
                 this.setState({ palette: localStorage.getItem('palette').split(',') });
+
+            if(localStorage.getItem('pixelIntro'))
+                this.setState({ intro: false });
 
             this.setState({
                 canvas: canvas,
@@ -438,6 +443,13 @@ class App extends Component {
         });
     }
 
+    onIntroClick() {
+        if(document.getElementById("showBox").checked)
+            localStorage.setItem('pixelIntro', true);
+
+        this.setState({ intro: false });
+    }
+
     componentDidMount() {
         this._init()
         .then(this._getCanvas)
@@ -451,6 +463,10 @@ class App extends Component {
     render() {
         return (
             <div className='App'>
+                {this.state.intro
+                    ? <Intro onClick={this.onIntroClick} />
+                    : null
+                }
                 <div className='splash'>
                     <p>Pixel <br /> Share</p>
                 </div>
@@ -490,6 +506,29 @@ const Palette = ({ palette, onClick, clearPalette }) =>
                 })
                 : null
             }
+        </div>
+    </div>
+
+const Intro = ({ onClick }) =>
+    <div id="intro">
+        <div id="description">
+            Welcome to <span id="title">PixelShare</span>&nbsp;&nbsp;the online community quilt<br/><br/>
+
+            <span>Scroll</span>&nbsp;&nbsp;to zoom in and out<br/><br/>
+
+            <span>Click and drag</span>&nbsp;&nbsp;to pan around the quilt<br/><br/>
+
+            <span>Click the swatch</span>&nbsp;&nbsp;to select a custom color<br/><br/>
+
+            <span>Add to palette</span>&nbsp;&nbsp;saves the color for now &ndash; and next time<br/><br/>
+
+            <span>Clear palette</span>&nbsp;&nbsp;resets the palette to the original colors
+        </div>
+        <div id="show">
+            <input type="checkbox" id="showBox" /> <span>Don't show again</span>
+        </div>
+        <div id="showEnter">
+            <input type="button" value="I'm Ready" onClick={onClick} />
         </div>
     </div>
 
