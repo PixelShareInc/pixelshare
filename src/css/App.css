@@ -54,35 +54,34 @@
       justify-content: center;
       margin: 7vh 0 2vh 0; }
       .App #intro #show input[type=checkbox] {
-        outline: none;
         position: relative;
         width: 2%;
         height: 2%;
         -webkit-appearance: none;
+        -moz-appearance: none;
         background-color: #fafafa;
         border: 1px solid #cacece;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0 -15px 10px -12px rgba(0, 0, 0, 0.05);
         padding: 5%;
         margin-right: 5%;
         border-radius: 3px;
         display: inline-block; }
       .App #intro #show input[type=checkbox]:active, .App #intro #show input[type=checkbox]:checked:active {
-        outline: none;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1); }
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0 1px 3px rgba(0, 0, 0, 0.1); }
       .App #intro #show input[type=checkbox]:checked {
-        outline: none;
         background-color: #e9ecee;
         border: 1px solid #adb8c0;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0 -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
         color: #99a1a7; }
       .App #intro #show input[type=checkbox]:checked:after {
-        outline: none;
         content: '\2714';
         font-size: 14px;
         position: absolute;
-        top: 0px;
+        top: 0;
         left: 3px;
         color: #99a1a7; }
+      .App #intro #show input[type=checkbox]:checked:focus {
+        outline: none; }
       .App #intro #show span {
         font-family: tokyo;
         font-size: 1.2vw; }
