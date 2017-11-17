@@ -85,6 +85,7 @@
                 margin-right: 5%;
             	border-radius: 3px;
             	display: inline-block;
+                outline: 0;
             }
 
             input[type=checkbox]:active, input[type=checkbox]:checked:active {
@@ -108,7 +109,8 @@
             }
 
             input[type=checkbox]:checked:focus {
-                outline: none;
+                outline: 0;
+                border: 1px solid #545454;
             }
 
             span {
