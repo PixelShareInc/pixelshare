@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './css/App.css';
+import './font-awesome-4.7.0/css/font-awesome.min.css';
 import io from 'socket.io-client';
 import axios from 'axios';
 import { ChromePicker } from 'react-color';
@@ -26,6 +27,7 @@ class App extends Component {
             quilt: null,
             originX: 0,
             originY: 0,
+            isLoading: true,
             palette: [
                 '247a23',
                 '30bf2e',
@@ -440,6 +442,7 @@ class App extends Component {
         this._init()
         .then(this._getCanvas)
         .then(this._initCanvas)
+        .then(() => this.setState({ isLoading: false }))
         .then(this._startDrawLoop)
         .then(this._startListeners)
         .catch(err => console.error(err));
@@ -452,6 +455,10 @@ class App extends Component {
                     <p>Pixel <br /> Share</p>
                 </div>
                 <canvas id='quilt'></canvas>
+                {this.state.isLoading
+                    ? <Loading/>
+                    : null
+                }
                 <div className='palette'>
                     <Palette palette={this.state.palette} onClick={this.onClick} savePalette={this.savePalette} clearPalette={this.clearPalette} />
                     <div className='picker'>
@@ -484,6 +491,12 @@ const Palette = ({ palette, onClick, clearPalette }) =>
                 : null
             }
         </div>
+    </div>
+
+const Loading = () =>
+    <div id="loading">
+        <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span className="sr-only">Loading...</span>
     </div>
 
 export default App;
