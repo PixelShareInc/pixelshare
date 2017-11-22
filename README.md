@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/derekkramer/pixelshare.svg?branch=master)](https://travis-ci.org/derekkramer/pixelshare)
 [![GitHub release](https://img.shields.io/github/release/derekkramer/pixelshare.svg)]()
-[![Code Climate](https://codeclimate.com/github/derekkramer/pixelshare/badges/gpa.svg)](https://codeclimate.com/github/derekkramer/pixelshare)
+[![Maintainability](https://api.codeclimate.com/v1/badges/049083fbe510de488dd8/maintainability)](https://codeclimate.com/github/derekkramer/pixelshare/maintainability)
 [![Issue Count](https://codeclimate.com/github/derekkramer/pixelshare/badges/issue_count.svg)](https://codeclimate.com/github/derekkramer/pixelshare)
 [![Dependencies Status](https://david-dm.org/derekkramer/pixelshare.svg)](https://david-dm.org/derekkramer/pixelshare)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fderekkramer%2Fpixelshare.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fderekkramer%2Fpixelshare?ref=badge_shield)
