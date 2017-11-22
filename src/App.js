@@ -29,6 +29,7 @@ class App extends Component {
             originY: 0,
             isLoading: true,
             intro: true,
+            eyedropper: false,
             palette: [
                 '247a23',
                 '30bf2e',
@@ -72,12 +73,14 @@ class App extends Component {
         this._updatePixel = this._updatePixel.bind(this);
         this._updateOffscreenCanvas = this._updateOffscreenCanvas.bind(this);
         this._getDrawLocation = this._getDrawLocation.bind(this);
-        this.onClick = this.onClick.bind(this);
+        this.onPaletteClick = this.onPaletteClick.bind(this);
         this._addColor = this._addColor.bind(this);
         this._rgbToHex = this._rgbToHex.bind(this);
         this.clearPalette = this.clearPalette.bind(this);
         this._checkPickerVisibility = this._checkPickerVisibility.bind(this);
         this.onIntroClick = this.onIntroClick.bind(this);
+        this.onEyedropperClick = this.onEyedropperClick.bind(this);
+        this._getColor = this._getColor.bind(this);
     }
 
     _init() {
@@ -223,11 +226,15 @@ class App extends Component {
             let { doc, col } = this._getDocumentLocation(pixelX, pixelY);
 
             if(pixelX >= 0 && pixelX < 500 && pixelY >= 0 && pixelY < 500) {
-                this._updatePixel(doc, col);
+                if(this.state.eyedropper) {
+                    this._getColor(doc, col);
+                }else {
+                    this._updatePixel(doc, col);
 
-                this._updateOffscreenCanvas(b, row, col);
+                    this._updateOffscreenCanvas(b, row, col);
 
-                socket.emit('clientUpdate', doc, b, row, col, this.state.quilt[doc].color);
+                    socket.emit('clientUpdate', doc, b, row, col, this.state.quilt[doc].color);
+                }
             }
         }
 
@@ -385,7 +392,7 @@ class App extends Component {
         return { x, y };
     }
 
-    onClick(event) {
+    onPaletteClick(event) {
         if(event.target.style.backgroundColor)
             this.setState({ color: this._rgbToHex(event.target.style.backgroundColor) });
     }
@@ -450,6 +457,31 @@ class App extends Component {
         this.setState({ intro: false });
     }
 
+    onEyedropperClick() {
+        let eyedropper = document.getElementById('eyedropper');
+
+        eyedropper.className = eyedropper.className === 'eyedropper' ? 'eyedropper_down' : 'eyedropper';
+
+        document.body.style.cursor = document.body.style.cursor !== 'copy' ? 'copy' : 'auto';
+
+        this.setState(prevState => {
+            let eyedropper = this.state.eyedropper ? false : true;
+
+            return { eyedropper };
+        });
+    }
+
+    _getColor(doc, col) {
+        let quilt = this.state.quilt;
+        let colors = quilt[doc].color;
+        let getCol = col * 7;
+
+        let color = colors.substr(getCol, 7).slice(0, -1);
+
+        this.setState({ color });
+        this.onEyedropperClick();
+    }
+
     componentDidMount() {
         this._init()
         .then(this._getCanvas)
@@ -468,7 +500,7 @@ class App extends Component {
                     : null
                 }
                 <div className='splash'>
-                    <p>Pixel <br /> Share</p>
+                    <p>Pixel <br /> Share<br /><span>0.1.0</span></p>
                 </div>
                 <canvas id='quilt'></canvas>
                 {this.state.isLoading
@@ -476,7 +508,7 @@ class App extends Component {
                     : null
                 }
                 <div className='palette'>
-                    <Palette palette={this.state.palette} onClick={this.onClick} savePalette={this.savePalette} clearPalette={this.clearPalette} />
+                    <Palette palette={this.state.palette} onPaletteClick={this.onPaletteClick} savePalette={this.savePalette} clearPalette={this.clearPalette} onEyedropperClick={this.onEyedropperClick} />
                     <div className='picker'>
                         <div>
                             <input type='button' id='add' value='Add to Palette' onClick={this._addColor} />
@@ -490,12 +522,10 @@ class App extends Component {
     }
 }
 
-const Palette = ({ palette, onClick, clearPalette }) =>
+const Palette = ({ palette, onPaletteClick, clearPalette, onEyedropperClick }) =>
     <div id='paletteContainer'>
-        <div id='paletteButtons'>
-            <input type='button' value='Clear Palette' onClick={clearPalette} />
-        </div>
-        <div id='palette' onClick={onClick}>
+        <input type='button' value='Clear Palette' onClick={clearPalette} />
+        <div id='palette' onClick={onPaletteClick}>
             {palette.length > 1 ?
                 palette.map(color => {
                     let id = `color${color}`;
@@ -507,20 +537,23 @@ const Palette = ({ palette, onClick, clearPalette }) =>
                 : null
             }
         </div>
+        <input className='eyedropper' id='eyedropper' type='button' value='&#9906;' onClick={onEyedropperClick} />
     </div>
 
 const Intro = ({ onClick }) =>
     <div id="intro">
         <div id="description">
-            Welcome to <span id="title">PixelShare</span>&nbsp;&nbsp;the online community quilt<br/><br/>
+            Welcome to <span id="title">PixelShare</span>&nbsp;&nbsp;the online community quilt<br/>
 
-            <span>Scroll</span>&nbsp;&nbsp;to zoom in and out<br/><br/>
+            <span>Scroll</span>&nbsp;&nbsp;to zoom in and out<br/>
 
-            <span>Click and drag</span>&nbsp;&nbsp;to pan around the quilt<br/><br/>
+            <span>Click and drag</span>&nbsp;&nbsp;to pan around the quilt<br/>
 
-            <span>Click the swatch</span>&nbsp;&nbsp;to select a custom color<br/><br/>
+            <span>Click the swatch</span>&nbsp;&nbsp;to select a custom color<br/>
 
-            <span>Add to palette</span>&nbsp;&nbsp;saves the color for now &ndash; and next time<br/><br/>
+            <span>Click the&nbsp;&nbsp;&#9906;&nbsp;&nbsp;button</span>&nbsp;&nbsp;to select a color from another pixel<br/>
+
+            <span>Add to palette</span>&nbsp;&nbsp;saves the color for now &ndash; and next time<br/>
 
             <span>Clear palette</span>&nbsp;&nbsp;resets the palette to the original colors
         </div>

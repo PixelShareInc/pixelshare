@@ -56,6 +56,7 @@
             padding-left: 1%;
             font-family: karmaticArcade;
             font-size: 2vw;
+            line-height: 200%;
             -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,.7) 50%, rgba(0,0,0,1));
         }
 
@@ -72,7 +73,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 7vh 0 2vh 0;
+            margin: 4vh 0 2vh 0;
 
             input[type=checkbox] {
                 position: relative;
@@ -167,6 +168,13 @@
             font-family: karmaticArcade;
             font-size: calc(100vw / 12 - 100vh / 12);
             -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,.7) 50%, rgba(0,0,0,1));
+
+            span {
+                font-size: 0.8vw;
+                line-height: 300%;
+                padding-left: 1vw;
+                vertical-align: top;
+            }
         }
     }
 
@@ -233,6 +241,8 @@
     #paletteContainer {
         width: 7vw;
         max-width: 80%;
+        display: flex;
+        flex-direction: column;
         margin: 5%;
         margin-bottom: auto;
 
@@ -246,10 +256,13 @@
             }
         }
 
-        #paletteButtons {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+        .eyedropper {
+            border: 1px solid #555;
+        }
+
+        .eyedropper_down {
+            @include background-gradient(#888, #bbb);
+            border: 1px solid #444;
         }
     }
 
