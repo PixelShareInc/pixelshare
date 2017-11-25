@@ -228,3 +228,75 @@
     border-right: 1px solid #eeeeee;
     margin: 0;
     padding: 0; }
+
+@media only screen and (max-width: 420px) {
+  .App {
+    flex-direction: column; }
+    .App > div {
+      width: 100vw;
+      height: auto; }
+    .App .splash {
+      background-position: left top;
+      padding: 2.5vw;
+      box-sizing: border-box; }
+      .App .splash p {
+        font-size: 9vw;
+        padding: 0; }
+        .App .splash p span {
+          display: none; }
+    .App #loading {
+      top: 67vw; }
+    .App .palette {
+      flex-direction: column; }
+      .App .palette .picker {
+        width: 20vw;
+        height: calc((100vh - 100vw) / 5 * -2);
+        margin: 0;
+        transform: translateY(calc((100vh - 100vw) / 5 * -2)); }
+        .App .palette .picker div {
+          flex-direction: column;
+          justify-content: flex-end;
+          align-items: center; }
+          .App .palette .picker div input[type=button] {
+            width: 100%;
+            height: calc((100vh - 100vw) / 5);
+            border: 1px solid #888;
+            border-top: 0;
+            font-size: 2.5vw; }
+      .App .palette input[type='color'] {
+        width: 94%;
+        height: calc((100vh - 100vw) / 5);
+        box-sizing: border-box;
+        padding: 0; }
+      .App .palette .picker-card {
+        width: 300% !important;
+        transform: translate(21vw, -102%); }
+    .App #paletteContainer {
+      width: 100vw;
+      display: grid;
+      grid-template-columns: 20vw 80vw;
+      grid-template-rows: repeat(4, calc((100vh - 100vw) / 5));
+      margin: 0; }
+      .App #paletteContainer #clear {
+        width: 20vw;
+        grid-column: 1;
+        grid-column-end: 1;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        font-size: 2.5vw;
+        box-sizing: border-box; }
+      .App #paletteContainer #palette {
+        grid-template-columns: repeat(5, 16vw);
+        grid-template-rows: repeat(4, calc((100vh - 100vw) / 5)); }
+        .App #paletteContainer #palette .color {
+          padding-top: calc((100vh - 100vw) / 5); }
+      .App #paletteContainer .eyedropper {
+        width: 20vw;
+        border: 1px solid #888;
+        font-size: 4vw; }
+      .App #paletteContainer .eyedropper_down {
+        font-size: 4vw; }
+    .App #quilt {
+      width: 100vw;
+      height: 100vw;
+      box-sizing: border-box; } }

@@ -17,6 +17,10 @@
     background: -o-linear-gradient(top, $from, $to);
 }
 
+$mobile: calc((100vh - 100vw) / 5);
+$mobileMargin: calc((100vh - 100vw) / 5 * -2);
+$mobilePicker: calc((100vh - 100vw) / 5 * -3);
+
 .App {
     width: 100vw; height: 100vh;
     display: flex;
@@ -272,5 +276,113 @@
         border-right: 1px solid #eeeeee;
         margin: 0;
         padding: 0;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .App {
+        flex-direction: column;
+
+        > div {
+            width: 100vw;
+            height: auto;
+        }
+
+        .splash {
+            background-position: left top;
+            padding: 2.5vw;
+            box-sizing: border-box;
+
+            p {
+                font-size: 9vw;
+                padding: 0;
+                span {
+                    display: none;
+                }
+            }
+        }
+
+        #loading {
+            top: 67vw;
+        }
+
+        .palette {
+            flex-direction: column;
+
+            .picker {
+                width: 20vw;
+                height: $mobileMargin;
+                margin: 0;
+                transform: translateY($mobileMargin);
+
+                div {
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    align-items: center;
+
+                    input[type=button] {
+                        width: 100%;
+                        height: $mobile;
+                        border: 1px solid #888;
+                        border-top: 0;
+                        font-size: 2.5vw;
+                    }
+                }
+            }
+
+            input[type='color'] {
+                width: 94%;
+                height: $mobile;
+                box-sizing: border-box;
+                padding: 0;
+            }
+
+            .picker-card {
+                width: 300% !important;
+                transform: translate(21vw, -102%);
+            }
+        }
+
+        #paletteContainer {
+            width: 100vw;
+            display: grid;
+            grid-template-columns: 20vw 80vw;
+            grid-template-rows: repeat(4, $mobile);
+            margin: 0;
+
+            #clear {
+                width: 20vw;
+                grid-column: 1;
+                grid-column-end: 1;
+                grid-row-start: 1;
+                grid-row-end: 2;
+                font-size: 2.5vw;
+                box-sizing: border-box;
+            }
+
+            #palette {
+                grid-template-columns: repeat(5, 16vw);
+                grid-template-rows: repeat(4, $mobile);
+
+                .color {
+                    padding-top: $mobile;
+                }
+            }
+
+            .eyedropper {
+                width: 20vw;
+                border: 1px solid #888;
+                font-size: 4vw;
+            }
+
+            .eyedropper_down {
+                font-size: 4vw;
+            }
+        }
+
+        #quilt {
+            width: 100vw; height: 100vw;
+            box-sizing: border-box;
+        }
     }
 }

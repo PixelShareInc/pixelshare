@@ -37,7 +37,9 @@ class App extends Component {
                 '205988',
                 '37abe4',
                 '8300dc',
+                'a563d2',
                 'ac0f5f',
+                'd65296',
                 'f42618',
                 'e9671d',
                 'f29221',
@@ -434,7 +436,9 @@ class App extends Component {
                 '205988',
                 '37abe4',
                 '8300dc',
+                'a563d2',
                 'ac0f5f',
+                'd65296',
                 'f42618',
                 'e9671d',
                 'f29221',
@@ -500,7 +504,7 @@ class App extends Component {
                     : null
                 }
                 <div className='splash'>
-                    <p>Pixel <br /> Share<br /><span>0.1.0</span></p>
+                    <p>Pixel Share<br /><span>0.1.0</span></p>
                 </div>
                 <canvas id='quilt'></canvas>
                 {this.state.isLoading
@@ -524,7 +528,7 @@ class App extends Component {
 
 const Palette = ({ palette, onPaletteClick, clearPalette, onEyedropperClick }) =>
     <div id='paletteContainer'>
-        <input type='button' value='Clear Palette' onClick={clearPalette} />
+        <input id='clear' type='button' value='Clear Palette' onClick={clearPalette} />
         <div id='palette' onClick={onPaletteClick}>
             {palette.length > 1 ?
                 palette.map(color => {
