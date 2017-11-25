@@ -34,12 +34,12 @@ $ brew install git
 Then, navigate into the directory where you want to clone the repository and enter:
 
 ```
-$ git clone https://www.github.com/PixelShareInc/pixelshare.git
+$ git clone https://www.github.com/derekkramer/pixelshare.git
 ```
 
 ### API
 
-Proper development operation requires the PixelShare API and MongoDB. Follow the installation [instructions](https://github.com/PixelShareInc/API) for the PixelShare API, then ensure you have MongoDB running in another terminal window:
+Proper development operation requires the PixelShare API and MongoDB. Follow the installation [instructions](https://github.com/derekkramer/pixelshareAPI) for the PixelShare API, then ensure you have MongoDB running in another terminal window:
 
 ```
 $ mongod
